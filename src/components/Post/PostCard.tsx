@@ -287,14 +287,15 @@ const PostCard = ({
       )}
       {showReplies
         ? replies
-            .map((event) => (
-              <PostCard
-                postId={event.id}
-                key={`${postId}reply${event.id}`}
-                showReplies={1}
-                asReply={true}
-              />
-            ))
+          .slice(0, showReplies)
+          .map((event) => (
+            <PostCard
+              postId={event.id}
+              key={`${postId}reply${event.id}`}
+              showReplies={1}
+              asReply={true}
+            />
+          ))
         : ''}
     </>
   );
