@@ -1,4 +1,4 @@
-'use client';
+
 
 import useStore from '@/store';
 import IrisTo from '@/iris/IrisTo';

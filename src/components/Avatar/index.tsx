@@ -1,4 +1,4 @@
-'use client';
+
 
 import { useProfileContent } from '@/hooks';
 import ProxyImg from '@/components/ProxyImg';

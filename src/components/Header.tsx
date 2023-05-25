@@ -1,4 +1,4 @@
-'use client';
+
 
 import { Link } from "react-router-dom";
 import { HeartIcon } from '@heroicons/react/24/outline';

@@ -1,4 +1,4 @@
-'use client';
+
 
 import { nip19 } from 'nostr-tools';
 import { useLocation } from 'react-router-dom';

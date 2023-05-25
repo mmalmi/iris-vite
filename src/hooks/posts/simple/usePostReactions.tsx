@@ -1,4 +1,4 @@
-'use client';
+
 
 import { useSubscribe } from 'nostr-hooks';
 

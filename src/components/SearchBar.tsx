@@ -1,4 +1,4 @@
-'use client';
+
 
 import { useState, useRef, useEffect, useCallback, KeyboardEvent } from 'react';
 import { useNavigate } from "react-router-dom";

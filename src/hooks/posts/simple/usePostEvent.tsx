@@ -1,4 +1,4 @@
-'use client';
+
 
 import { useSubscribe } from 'nostr-hooks';
 import { nip19 } from 'nostr-tools';

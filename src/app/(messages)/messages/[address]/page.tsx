@@ -1,4 +1,4 @@
-'use client';
+
 
 import { nip19, nip04 } from 'nostr-tools';
 

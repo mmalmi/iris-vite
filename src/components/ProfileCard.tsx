@@ -1,4 +1,4 @@
-'use client';
+
 
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import Modal from '@/components/modal/Modal';

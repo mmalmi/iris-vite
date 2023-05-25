@@ -1,4 +1,4 @@
-'use client';
+
 
 import Feed from '@/components/Feed';
 import useStore from '@/store';
