@@ -1,5 +1,6 @@
 import Embed from './index';
 import PostCard from '@/components/Post/PostCard';
+import {toHexKey} from "@/utils/hexKey";
 
 const eventRegex =
   /(?:^|\s|nostr:|(?:https?:\/\/[\w./]+)|iris\.to\/|snort\.social\/e\/|damus\.io\/)+((?:@)?note[a-zA-Z0-9]{59,60})(?![\w/])/gi;
@@ -7,10 +8,10 @@ const eventRegex =
 const NostrUser: Embed = {
   regex: eventRegex,
   component: ({ match, key }) => {
-    console.log('match', match);
+    const hex = toHexKey(match.replace('@', ''));
     return (
       <div key={key} className="rounded-lg border border-neutral-800 my-4">
-        <PostCard postId={match.replace('@', '')} asInlineQuote={true} />
+        <PostCard postId={hex} asInlineQuote={true} />
       </div>
     );
   },
