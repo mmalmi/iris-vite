@@ -2,6 +2,7 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Home from './app/(dashboard)/page';
 import Notifications from './app/(dashboard)/notifications/page';
 import Messages from './app/(messages)/messages/page';
+import MessageThread from './app/(messages)/messages/[address]/page';
 import Settings from './app/(settings)/settings/page';
 import About from './app/(dashboard)/about/page';
 import Login from './app/(auth)/login/page';
@@ -22,6 +23,7 @@ function App() {
         <Route path="/logout" element={<Logout />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/messages" element={<Messages />} />
+        <Route path="/messages/:user" element={<MessageThread />} />
         <Route path="/post" element={<NewPost />} />
         <Route path="/search" element={<Search />} />
         <Route path="/search/:keyword" element={<SearchResults />} />

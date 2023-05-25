@@ -1,5 +1,3 @@
-
-
 import { Event } from 'nostr-tools';
 
 import Layout from '@/app/(dashboard)/layout';
