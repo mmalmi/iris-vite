@@ -5,6 +5,7 @@ import Messages from './app/(messages)/messages/page';
 import Settings from './app/(settings)/settings/page';
 import About from './app/(dashboard)/about/page';
 import Login from './app/(auth)/login/page';
+import Logout from './app/(auth)/logout/page';
 import Signup from './app/(auth)/signup/page';
 import Address from './app/(dashboard)/[address]/page';
 import EditProfile from './app/(dashboard)/profile/edit/page';
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<Logout />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/messages" element={<Messages />} />
         <Route path="/post" element={<NewPost />} />

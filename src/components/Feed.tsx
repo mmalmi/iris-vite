@@ -128,10 +128,10 @@ const Feed = ({ showDisplayAs, relays, filterOptions }: Props) => {
     return events
       .flatMap((event) => {
         const imageMatches = (event.content.match(Image.regex) || []).map(
-          (url) => ({ type: 'image', url, created_at: event.created_at })
+          (url: string) => ({ type: 'image', url, created_at: event.created_at })
         );
         const videoMatches = (event.content.match(Video.regex) || []).map(
-          (url) => ({ type: 'video', url, created_at: event.created_at })
+          (url: string) => ({ type: 'video', url, created_at: event.created_at })
         );
         return [...imageMatches, ...videoMatches];
       })
