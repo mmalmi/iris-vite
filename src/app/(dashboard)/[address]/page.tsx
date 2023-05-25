@@ -7,9 +7,9 @@ export default function Address() {
   const slug = useParams().slug as string;
   let content;
   if (slug?.startsWith('note')) {
-    content = <PostPage address={slug} />;
+    content = <PostPage key={slug} address={slug} />;
   } else {
-    content = <ProfilePage address={slug} />;
+    content = <ProfilePage key={slug} address={slug} />;
   }
   return <Layout>{content}</Layout>;
 }
