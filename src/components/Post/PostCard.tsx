@@ -67,6 +67,18 @@ const PostCard = ({
 
   const [mutedUsers] = useLocalState('muted', {});
 
+  const replies = useMemo(
+  () =>
+    sortedReactions.filter((event) => {
+      if (mutedUsers[event.pubkey]) return false;
+
+      if (event.kind !== 1 || isRepost(event)) return false;
+
+      return getReplyingToEvent(event) === postId;
+    }),
+  [sortedReactions, mutedUsers, postId]
+  );
+
   const { displayName, picture } = useProfileContent(postEvent?.pubkey || '');
   const npub = nip19.npubEncode(postEvent?.pubkey || '');
 
@@ -274,12 +286,7 @@ const PostCard = ({
         ''
       )}
       {showReplies
-        ? sortedReactions
-            .filter((event) => {
-              if (mutedUsers[event.pubkey]) return false;
-              if (event.kind !== 1 || isRepost(event)) return false;
-              return getReplyingToEvent(event) === postId;
-            })
+        ? replies
             .map((event) => (
               <PostCard
                 postId={event.id}

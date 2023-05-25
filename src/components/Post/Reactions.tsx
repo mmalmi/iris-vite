@@ -142,13 +142,13 @@ const Reactions = ({
   // in standalone, show twitter-like listings that open the modal
   return (
     <>
-      <ZapModal
-        show={showZapModal}
+      {showZapModal && <ZapModal
+        show={true}
         lnurl={lightning}
         note={event.id}
         recipient={event.pubkey}
         onClose={() => setShowZapModal(false)}
-      />
+      />}
       {standalone && hasReactions && (
         <>
           <hr className="-mx-4 opacity-10" />
