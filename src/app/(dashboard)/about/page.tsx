@@ -108,7 +108,7 @@ export default function About() {
 
         <p>
           Released under MIT license. Code:{' '}
-          <a href="https://github.com/mmalmi/iris-nextjs" target="_blank">
+          <a href="https://github.com/mmalmi/iris-vite" target="_blank">
             Github
           </a>
           .
