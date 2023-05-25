@@ -20,7 +20,7 @@ export default function ChatList() {
       ],
       options: {
         force: true,
-        invalidate: false,
+        cacheRefresh: false,
         closeAfterEose: false,
       },
     }
