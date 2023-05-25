@@ -1,17 +1,16 @@
-
-
 import Feed from '@/components/Feed';
 import useStore from '@/store';
 import { Event, Filter } from 'nostr-tools';
-
-
+import {useParams} from "react-router-dom";
+import Layout from "@/app/(dashboard)/layout";
 
 const SEARCH_RELAYS = ['wss://relay.nostr.band'];
 
-export default function Search({ params }: { params: { keyword: string } }) {
+export default function Search() {
+  const keyword = useParams().keyword as string;
   const defaultRelays = useStore((store) => store.relays);
   const relays = [...new Set([...SEARCH_RELAYS, ...defaultRelays])];
-  const searchTerm = decodeURIComponent(params.keyword).toLowerCase().trim();
+  const searchTerm = decodeURIComponent(keyword).toLowerCase().trim();
 
   const filter: Filter = { kinds: [1], limit: 100, search: searchTerm };
   const filterFn = (event: Event) =>
@@ -19,8 +18,8 @@ export default function Search({ params }: { params: { keyword: string } }) {
   const filterOptions = [{ name: 'Search', filter, filterFn }];
 
   return (
-    <>
+    <Layout>
       <Feed filterOptions={filterOptions} relays={relays} />
-    </>
+    </Layout>
   );
 }

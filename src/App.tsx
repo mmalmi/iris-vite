@@ -8,6 +8,9 @@ import Login from './app/(auth)/login/page';
 import Signup from './app/(auth)/signup/page';
 import Address from './app/(dashboard)/[address]/page';
 import EditProfile from './app/(dashboard)/profile/edit/page';
+import NewPost from './app/(dashboard)/post/page';
+import Search from './app/(dashboard)/search/page';
+import SearchResults from './app/(dashboard)/search/[keyword]/page';
 
 function App() {
   return (
@@ -17,6 +20,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/messages" element={<Messages />} />
+        <Route path="/post" element={<NewPost />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/search/:keyword" element={<SearchResults />} />
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/about" element={<About />} />
