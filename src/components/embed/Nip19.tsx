@@ -1,14 +1,14 @@
 import Embed from './index';
 import Name from '@/components/Name';
 import PostCard from '@/components/Post/PostCard';
-import Link from 'next/link';
+import { Link } from "react-router-dom";
 import { nip19 } from 'nostr-tools';
 
 const nip19Regex = /\bnostr:(n(?:event|profile)1\w+)\b/g;
 
 const NostrUser: Embed = {
   regex: nip19Regex,
-  component: ({ match, index, key }) => {
+  component: ({ match, key }) => {
     try {
       const { type, data } = nip19.decode(match);
       if (type === 'nprofile') {
@@ -16,10 +16,10 @@ const NostrUser: Embed = {
           <>
             {' '}
             <Link
-              prefetch={false}
+             
               key={key}
               className="text-iris-blue hover:underline"
-              href={`/${data.pubkey}`}
+              to={`/${data.pubkey}`}
             >
               <Name pub={data.pubkey} />
             </Link>

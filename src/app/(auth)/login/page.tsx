@@ -1,16 +1,17 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useCallback, useEffect } from 'react';
 import { nip19 } from 'nostr-tools';
+import Layout from '@/app/(auth)/layout';
 
 import CardContainer from '@/components/CardContainer';
 
 import useStore from '@/store';
 
 const Login = () => {
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const { data } = useStore((state) => state.auth.user);
   const { loginWithPublicKey, loginWithPrivateKey } = useStore(
@@ -19,9 +20,9 @@ const Login = () => {
 
   useEffect(() => {
     if (data) {
-      router.replace('/');
+      navigate('/');
     }
-  }, [data, router]);
+  }, [data]);
 
   const handlePrivateKeyInput = useCallback((event: any) => {
     const key = event.target.value;
@@ -50,7 +51,7 @@ const Login = () => {
   }, [loginWithPublicKey]);
 
   return (
-    <>
+    <Layout>
       <CardContainer>
         <div className="flex items-baseline gap-2">
           <h1 className="text-2xl font-bold md:text-4xl">iris</h1>
@@ -83,12 +84,12 @@ const Login = () => {
       <CardContainer>
         <p className="text-sm">Don't have an account?</p>
         <p>
-          <Link href="/signup" className="btn btn-sm">
+          <Link to="/signup" className="btn btn-sm">
             Sign up
           </Link>
         </p>
       </CardContainer>
-    </>
+    </Layout>
   );
 };
 

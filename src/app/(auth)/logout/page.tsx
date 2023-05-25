@@ -1,22 +1,22 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
 
 import useStore from '@/store';
 
 const Logout = () => {
-  const router = useRouter();
+  const navigate = useNavigate();
   const logout = useStore((state) => state.auth.logout);
   const { data } = useStore((state) => state.auth.user);
 
   useEffect(() => {
     if (!data) {
-      router.push('/login');
+      navigate('/login');
     } else {
       logout();
     }
-  }, [data, router, logout]);
+  }, [data, logout]);
 
   return <></>;
 };

@@ -2,7 +2,7 @@
 
 import { memo } from 'react';
 
-import Link from 'next/link';
+import { Link } from "react-router-dom";
 
 import { nip19 } from 'nostr-tools';
 
@@ -25,13 +25,13 @@ const Profile = ({ params }: { params: { address: string } }) => {
     <div className="flex flex-col gap-4 p-2">
       {latestContactEvent?.tags
         ?.filter((tag) => tag[0] === 'p')
-        .map((tag, index) => (
+        .map((tag) => (
           <div
             key={tag[1]}
             className="flex items-center w-full justify-between"
           >
             <Link
-              href={`/${nip19.npubEncode(tag[1])}`}
+              to={`/${nip19.npubEncode(tag[1])}`}
               className="flex gap-4 items-center"
             >
               <Avatar pub={tag[1]} />

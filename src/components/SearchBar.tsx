@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback, KeyboardEvent } from 'react';
-import { useRouter } from 'next/navigation';
+import { useNavigate } from "react-router-dom";
 import { FormEvent } from 'react';
 import { throttle } from 'lodash';
 import { BaseAvatar } from '@/components/Avatar';
@@ -29,7 +29,7 @@ export default function SearchBar() {
   const [focusedIndex, setFocusedIndex] = useState(-1); // Add state for the focused index
   const inputRef = useRef<HTMLInputElement>(null); // Add ref for the input element
 
-  const router = useRouter();
+  const navigate = useNavigate();
   const resultsRef = useRef<HTMLDivElement[]>([]);
 
   const handleArrowKeys = useCallback(
@@ -57,13 +57,13 @@ export default function SearchBar() {
       setSearchTerm('');
       setSearchResults([]);
       if (index === -1) {
-        router.push(`/search/${searchTerm}`);
+        navigate(`/search/${searchTerm}`);
       } else {
         const npub = searchResults[index][2];
-        router.push(`/${npub}`);
+        navigate(`/${npub}`);
       }
     },
-    [searchResults, searchTerm, router]
+    [searchResults, searchTerm]
   );
 
   useEffect(() => {
@@ -102,13 +102,13 @@ export default function SearchBar() {
     // if starts with https://iris.to redirecto to pathname
     if (value.startsWith('https://iris.to')) {
       const pathname = value.replace('https://iris.to', '');
-      router.push(pathname);
+      navigate(pathname);
       return;
     } else {
       const match = value.match(/(?:npub|note)[a-zA-Z0-9]{59,60}/);
       if (match) {
         const id = match[0];
-        router.push(`/${id}`);
+        navigate(`/${id}`);
         return;
       }
       // if nip05 (user@example.com)
@@ -119,7 +119,7 @@ export default function SearchBar() {
         nip05.queryProfile(id).then((profile) => {
           if (profile) {
             setSearchTerm('');
-            router.push(`/${id}`);
+            navigate(`/${id}`);
             return;
           }
         });
@@ -181,7 +181,7 @@ export default function SearchBar() {
               <div className="text-neutral-400 text-sm">Search posts</div>
             </div>
           </div>
-          {searchResults.map(([_, result, npub], index) => (
+          {searchResults.map(([_, result], index) => (
             <div
               key={result.id}
               ref={(el) => {

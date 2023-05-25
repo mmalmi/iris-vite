@@ -12,7 +12,7 @@ export interface AuthSlice {
   };
 }
 
-const getUserRelays = (pub: string) => {
+const getUserRelays = (_pub: string) => {
   // TODO
 };
 

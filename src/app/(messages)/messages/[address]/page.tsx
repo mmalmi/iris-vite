@@ -8,7 +8,7 @@ import DirectMessage from '@/components/DirectMessage';
 import { PaperAirplaneIcon } from '@heroicons/react/24/outline';
 import { FormEventHandler, useState } from 'react';
 
-export const runtime = 'edge';
+
 
 const MessageThread = ({ params }: { params: { address: string } }) => {
   const [newMessage, setNewMessage] = useState('');

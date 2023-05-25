@@ -1,20 +1,21 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useNavigate } from "react-router-dom";
 import { generatePrivateKey } from 'nostr-tools';
 import { useCallback, useEffect, useState } from 'react';
 import EULA from './EULA';
 import localState from "@/utils/LocalState";
+import Layout from '@/app/(auth)/layout';
 
 import CardContainer from '@/components/CardContainer';
 
 import useStore from '@/store';
 
 import { usePublish } from '@/hooks';
-import Link from 'next/link';
+import { Link } from "react-router-dom";
 
 const Login = () => {
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const { data } = useStore((state) => state.auth.user);
   const { loginWithPrivateKey } = useStore((state) => state.auth);
@@ -43,9 +44,9 @@ const Login = () => {
           content: { name },
         }).catch(console.error);
       }
-      router.replace('/');
+      navigate('/');
     }
-  }, [data, router, name, publish]);
+  }, [data, name, publish]);
 
   const handleDisplayNameInput = useCallback((event: any) => {
     setName(event.target.value);
@@ -60,7 +61,7 @@ const Login = () => {
   }, [isStandalone]);
 
   return (
-    <>
+    <Layout>
       {showEula && (
         <EULA
           onAccept={() => {
@@ -97,12 +98,12 @@ const Login = () => {
       <CardContainer>
         <p className="text-sm">Already have an account?</p>
         <p>
-          <Link href="/login" className="btn btn-sm">
+          <Link to="/login" className="btn btn-sm">
             Log in
           </Link>
         </p>
       </CardContainer>
-    </>
+    </Layout>
   );
 };
 

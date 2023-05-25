@@ -18,7 +18,7 @@ const useProfileMetadata = (profileAddress: string | undefined) => {
     invalidate,
   } = useSubscribe({
     relays,
-    filters: !!profileHex ? [{ authors: [profileHex], kinds: [0] }] : [],
+    filters: profileHex ? [{ authors: [profileHex], kinds: [0] }] : [],
     options: { enabled: !!profileHex },
   });
 

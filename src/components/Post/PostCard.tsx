@@ -1,7 +1,7 @@
 'use client';
 
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Event, nip19 } from 'nostr-tools';
 import { MouseEventHandler, useCallback, useMemo, memo } from 'react';
 
@@ -49,7 +49,7 @@ const PostCard = ({
   asInlineQuote,
   showReplyForm,
 }: Props) => {
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const { isFetching, postEvent, createdAt, nip19NoteId } =
     usePostEvent(postId);
@@ -65,7 +65,7 @@ const PostCard = ({
     return externalReactions.sort((a, b) => a.created_at - b.created_at);
   }, [internalReactions, externalReactions]);
 
-  let [mutedUsers] = useLocalState('muted', {});
+  const [mutedUsers] = useLocalState('muted', {});
 
   const { displayName, picture } = useProfileContent(postEvent?.pubkey || '');
   const npub = nip19.npubEncode(postEvent?.pubkey || '');
@@ -90,10 +90,10 @@ const PostCard = ({
 
       if (!isMatch) {
         e.preventDefault();
-        router.push(`/${nip19NoteId}`);
+        navigate(`/${nip19NoteId}`);
       }
     },
-    [standalone, router, nip19NoteId]
+    [standalone, nip19NoteId]
   );
 
   const replyingToEvent = useMemo(
@@ -158,8 +158,8 @@ const PostCard = ({
       threadRoot &&
       threadRoot !== replyingToEvent ? (
         <Link
-          prefetch={false}
-          href={`/${nip19.noteEncode(threadRoot)}`}
+         
+          to={`/${nip19.noteEncode(threadRoot)}`}
           className="-mb-2 mt-2 text-sm opacity-50 flex items-center gap-2 px-4"
         >
           Show thread
@@ -185,8 +185,8 @@ const PostCard = ({
         >
           <div className="flex items-center gap-2">
             <Link
-              prefetch={false}
-              href={`/${npub}`}
+             
+              to={`/${npub}`}
               className="flex items-center gap-2"
             >
               {picture ? (
@@ -226,8 +226,8 @@ const PostCard = ({
               Replying to
               {replyingToUsers.slice(0, 3).map((tag) => (
                 <Link
-                  prefetch={false}
-                  href={`/${nip19.npubEncode(tag[1])}`}
+                 
+                  to={`/${nip19.npubEncode(tag[1])}`}
                   key={`${postId}replyingTo${tag[1]}`}
                 >
                   <Name pub={tag[1]} />

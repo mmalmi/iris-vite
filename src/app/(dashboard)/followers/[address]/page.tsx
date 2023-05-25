@@ -2,7 +2,7 @@
 
 import { memo } from 'react';
 
-import Link from 'next/link';
+import { Link } from "react-router-dom";
 
 import { nip19 } from 'nostr-tools';
 import { useState, useEffect } from 'react';
@@ -37,7 +37,7 @@ const Profile = ({ params }: { params: { address: string } }) => {
           className="flex items-center w-full justify-between"
         >
           <Link
-            href={`/${nip19.npubEncode(follower)}`}
+            to={`/${nip19.npubEncode(follower)}`}
             className="flex gap-4 items-center"
           >
             <Avatar pub={follower} />

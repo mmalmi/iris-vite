@@ -1,10 +1,9 @@
 import Embed from './index';
-import Link from 'next/link';
 
 const Instagram: Embed = {
   regex:
     /(?:https?:\/\/)?(?:www\.)?(?:instagram\.com\/)((?:p|reel)\/[\w-]{11})(?:\S+)?/g,
-  component: ({ match, index, key }) => {
+  component: ({ match, key }) => {
     return (
       <iframe
         className="instagram"

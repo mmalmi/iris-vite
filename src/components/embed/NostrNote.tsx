@@ -6,7 +6,7 @@ const eventRegex =
 
 const NostrUser: Embed = {
   regex: eventRegex,
-  component: ({ match, index, key }) => {
+  component: ({ match, key }) => {
     console.log('match', match);
     return (
       <div key={key} className="rounded-lg border border-neutral-800 my-4">

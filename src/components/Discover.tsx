@@ -1,7 +1,7 @@
 'use client';
 
 import { FireIcon } from '@heroicons/react/24/outline';
-import Link from 'next/link';
+import { Link } from "react-router-dom";
 import { useEffect, useState } from 'react';
 
 import SearchBar from '@/components/SearchBar';
@@ -38,10 +38,10 @@ const TrendingPosts = () => {
           .filter((post) => !mutedUsers[post.event?.pubkey])
           .map((post) => (
             <div key={post.id} className="flex gap-2 w-full break-words">
-              <Link href={`/${nip19.npubEncode(post.event?.pubkey)}`}>
+              <Link to={`/${nip19.npubEncode(post.event?.pubkey)}`}>
                 <Avatar pub={post.event?.pubkey} width="w-8" />
               </Link>
-              <Link href={`/${nip19.noteEncode(post.id)}`} className="w-full">
+              <Link to={`/${nip19.noteEncode(post.id)}`} className="w-full">
                 <b>
                   <Name pub={post.event?.pubkey} />
                 </b>

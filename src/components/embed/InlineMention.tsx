@@ -1,7 +1,7 @@
 // mentions like #[3], can refer to event or user
 
 import Embed from './index';
-import Link from 'next/link';
+import { Link } from "react-router-dom";
 import Name from '@/components/Name';
 import PostCard from '@/components/Post/PostCard';
 import { nip19 } from 'nostr-tools';
@@ -24,9 +24,9 @@ const InlineMention: Embed = {
     if (type === 'p') {
       return (
         <Link
-          prefetch={false}
+         
           key={key}
-          href={`/${nip19.npubEncode(id)}`}
+          to={`/${nip19.npubEncode(id)}`}
           className="text-iris-blue hover:underline"
         >
           <Name pub={id} />

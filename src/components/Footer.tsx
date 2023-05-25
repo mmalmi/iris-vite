@@ -12,6 +12,11 @@ import {
   PlusCircleIcon as PlusCircleIconFull,
 } from '@heroicons/react/24/solid';
 
+import { Link, useLocation } from "react-router-dom";
+import Avatar from '@/components/Avatar';
+import useStore from '@/store';
+import { useProfileContent } from '@/hooks';
+
 const MagnifyingGlassIconFull = ({ className }: { className?: string }) => {
   return (
     <svg
@@ -30,16 +35,10 @@ const MagnifyingGlassIconFull = ({ className }: { className?: string }) => {
   );
 };
 
-import Link from 'next/link';
-import Avatar from '@/components/Avatar';
-import useStore from '@/store';
-import { useProfileContent } from '@/hooks';
-import { usePathname } from 'next/navigation';
-
 const Footer = () => {
   const userData = useStore((state) => state.auth.user.data);
   const { npub } = useProfileContent(userData?.publicKey || '');
-  const pathname = usePathname();
+  const {pathname} = useLocation();
 
   if (!userData?.publicKey) return null;
 
@@ -47,7 +46,7 @@ const Footer = () => {
     <div className="fixed md:hidden bottom-0 z-10 w-full bg-base-200 pb-safe-area-inset-bottom">
       <div className="flex w-full h-full items-stretch">
         <Link
-          href="/"
+          to="/"
           className="flex-grow flex items-center justify-center p-3"
         >
           {pathname === '/' ? (
@@ -57,7 +56,7 @@ const Footer = () => {
           )}
         </Link>
         <Link
-          href="/search"
+          to="/search"
           className="flex-grow flex items-center justify-center p-3"
         >
           {pathname === '/search' ? (
@@ -67,7 +66,7 @@ const Footer = () => {
           )}
         </Link>
         <Link
-          href="/post"
+          to="/post"
           className="flex-grow flex items-center justify-center p-3"
         >
           {pathname === '/post' ? (
@@ -77,7 +76,7 @@ const Footer = () => {
           )}
         </Link>
         <Link
-          href="/messages"
+          to="/messages"
           className="flex-grow flex items-center justify-center p-3"
         >
           {pathname === '/messages' ? (
@@ -87,13 +86,13 @@ const Footer = () => {
           )}
         </Link>
         {/*
-        <Link href="/post/new" className="flex-grow flex items-center justify-center p-3">
+        <Link to="/post/new" className="flex-grow flex items-center justify-center p-3">
           {pathname === "/post/new" ? <PlusCircleIconFull className="h-6 w-6"/> : <PlusCircleIcon className="h-6 w-6"/>}
         </Link>
         */}
         {npub && (
           <Link
-            href={`/${npub}`}
+            to={`/${npub}`}
             className="flex-grow flex items-center justify-center p-3"
           >
             <div

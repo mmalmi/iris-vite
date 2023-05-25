@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import Avatar from "@/components/Avatar";
 import Name from "@/components/Name";
 import FollowButton from "@/components/FollowButton";
@@ -50,7 +50,7 @@ export default function FollowSuggestions() {
       {SUGGESTED_FOLLOWS.map(([npub, bio]) => (
         <div key={npub} className="flex flex-row justify-between">
           <Link
-            href={`/${npub}`}
+            to={`/${npub}`}
             key={npub}
             className="flex items-center gap-4"
           >

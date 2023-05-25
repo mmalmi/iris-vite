@@ -1,4 +1,4 @@
-import { Event, getEventHash, signEvent, UnsignedEvent } from 'nostr-tools';
+import { Event } from 'nostr-tools';
 
 import useSign from './useSign';
 import useStore from '@/store';

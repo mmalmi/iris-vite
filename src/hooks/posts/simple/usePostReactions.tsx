@@ -9,7 +9,7 @@ const usePostReactions = (postId: string | undefined) => {
 
   let { events: reactionEvents, eose: reactionEose } = useSubscribe({
     relays,
-    filters: !!postId ? [{ '#e': [postId], kinds: [1, 6, 7, 9735] }] : [],
+    filters: postId ? [{ '#e': [postId], kinds: [1, 6, 7, 9735] }] : [],
     options: {
       closeAfterEose: false,
       enabled: !!postId,

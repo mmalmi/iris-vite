@@ -3,7 +3,7 @@
 import useStore from '@/store';
 import IrisTo from '@/iris/IrisTo';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useNavigate } from "react-router-dom";
 import useSign from '@/hooks/useSign';
 
 function CreateAccount({ onSuccess }: { onSuccess: (name: string) => void }) {
@@ -135,7 +135,7 @@ function CreateAccount({ onSuccess }: { onSuccess: (name: string) => void }) {
 }
 
 function AccountName({ name, link = true }: { name: string; link?: boolean }) {
-  const router = useRouter();
+  const navigate = useNavigate();
   return (
     <>
       <p>
@@ -148,7 +148,7 @@ function AccountName({ name, link = true }: { name: string; link?: boolean }) {
             href={`https://iris.to/${name}`}
             onClick={(e) => {
               e.preventDefault();
-              router.replace(`/${name}`);
+              navigate(`/${name}`);
             }}
           >
             iris.to/{name}

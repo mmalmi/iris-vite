@@ -1,35 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import Home from './app/(dashboard)/page';
+import Notifications from './app/(dashboard)/notifications/page';
+import Messages from './app/(messages)/messages/page';
+import Settings from './app/(settings)/settings/page';
+import About from './app/(dashboard)/about/page';
+import Login from './app/(auth)/login/page';
+import Signup from './app/(auth)/signup/page';
+import Address from './app/(dashboard)/[address]/page';
+import EditProfile from './app/(dashboard)/profile/edit/page';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1 className="text-iris-green text-sm">Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/messages" element={<Messages />} />
+        <Route path="/notifications" element={<Notifications />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/profile/edit" element={<EditProfile />} />
+        <Route path="/:slug" element={<Address />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;

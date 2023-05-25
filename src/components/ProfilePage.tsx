@@ -27,7 +27,7 @@ const ProfilePage = ({ address }: { address: string }) => {
           window.history.replaceState(data, '', `/${nip05addr.split('@')[0]}`);
         }
         else {
-          window.history.replaceState(data, '', `/${nip05addr.replace(/^_@/src, '')}`);
+          window.history.replaceState(data, '', `/${nip05addr.replace(/^_@/, '')}`);
         }
       });
     }

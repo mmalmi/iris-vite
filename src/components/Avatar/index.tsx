@@ -30,7 +30,7 @@ export default function Avatar({
   pub: string;
   width?: Width;
 }) {
-  let { picture } = useProfileContent(pub);
+  const { picture } = useProfileContent(pub);
 
   return <BaseAvatar url={picture} width={width} />;
 }

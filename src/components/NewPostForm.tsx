@@ -6,7 +6,7 @@ import Upload from '@/components/Upload';
 import CardContainer from '@/components/CardContainer';
 import useStore from '@/store';
 import { nip19, Event } from 'nostr-tools';
-import Link from 'next/link';
+import { Link } from "react-router-dom";
 import { PaperClipIcon } from '@heroicons/react/24/outline';
 
 import usePublish from "@/hooks/usePublish";
@@ -87,7 +87,7 @@ const NewPostForm: React.FC<Props> = ({
     <CardContainer>
       <form ref={formRef} onSubmit={handleSubmit} className="w-full">
         <div className="flex items-start">
-          <Link href={`/${myNpub}`} className="mr-4">
+          <Link to={`/${myNpub}`} className="mr-4">
             <Avatar width="w-12" pub={userData?.publicKey || ''} />{' '}
             {/* Render the Avatar component here */}
           </Link>

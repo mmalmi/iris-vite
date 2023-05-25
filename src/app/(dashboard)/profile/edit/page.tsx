@@ -7,7 +7,8 @@ import useStore from '@/store';
 import CardContainer from '@/components/CardContainer';
 import { useProfileMetadata } from '@/hooks';
 import Upload from '@/components/Upload';
-import { useRouter } from 'next/navigation';
+import { useNavigate } from "react-router-dom";
+import Layout from "@/app/(dashboard)/layout";
 
 const IMAGE_FIELDS = ['picture', 'banner'];
 
@@ -19,7 +20,7 @@ const EditProfile = () => {
   const myNpub = userData?.publicKey
     ? nip19.npubEncode(userData?.publicKey)
     : '';
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const { latestMetadataEvent, invalidate } = useProfileMetadata(
     userData?.publicKey || ''
@@ -63,7 +64,7 @@ const EditProfile = () => {
       tags: latestMetadataEvent?.tags || [],
     });
     invalidate();
-    router.push(`/${myNpub}`);
+    navigate(`/${myNpub}`);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -153,46 +154,48 @@ const EditProfile = () => {
   };
 
   return (
-    <CardContainer>
-      <div className="prose">
-        <form onSubmit={handleSubmit} className="w-full">
-          {renderProfileFields()}
-          <button type="submit" className="btn btn-primary mt-4">
-            Save
-          </button>
-        </form>
-        <h4>Add new field</h4>
-        <form onSubmit={(e) => handleAddField(e)}>
-          <p>
-            <label htmlFor="newFieldName">Field name:</label>
-            <br />
-            <input
-              value={newFieldName}
-              type="text"
-              id="newFieldName"
-              className="input w-full"
-              onChange={(e) => setNewFieldName(e.target.value)}
-            />
-          </p>
-          <p>
-            <label htmlFor="newFieldValue">Field value:</label>
-            <br />
-            <input
-              value={newFieldValue}
-              type="text"
-              id="newFieldValue"
-              className="input"
-              onChange={(e) => setNewFieldValue(e.target.value)}
-            />
-          </p>
-          <p>
-            <button type="submit" className="btn btn-primary">
-              Add new attribute
+    <Layout>
+      <CardContainer>
+        <div className="prose">
+          <form onSubmit={handleSubmit} className="w-full">
+            {renderProfileFields()}
+            <button type="submit" className="btn btn-primary mt-4">
+              Save
             </button>
-          </p>
-        </form>
-      </div>
-    </CardContainer>
+          </form>
+          <h4>Add new field</h4>
+          <form onSubmit={(e) => handleAddField(e)}>
+            <p>
+              <label htmlFor="newFieldName">Field name:</label>
+              <br />
+              <input
+                value={newFieldName}
+                type="text"
+                id="newFieldName"
+                className="input w-full"
+                onChange={(e) => setNewFieldName(e.target.value)}
+              />
+            </p>
+            <p>
+              <label htmlFor="newFieldValue">Field value:</label>
+              <br />
+              <input
+                value={newFieldValue}
+                type="text"
+                id="newFieldValue"
+                className="input"
+                onChange={(e) => setNewFieldValue(e.target.value)}
+              />
+            </p>
+            <p>
+              <button type="submit" className="btn btn-primary">
+                Add new attribute
+              </button>
+            </p>
+          </form>
+        </div>
+      </CardContainer>
+    </Layout>
   );
 };
 

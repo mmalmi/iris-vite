@@ -2,6 +2,8 @@
 
 import { Event } from 'nostr-tools';
 
+import Layout from '@/app/(dashboard)/layout';
+
 import { getReplyingToEvent } from '@/utils/event';
 
 import { useProfileContacts } from '@/hooks';
@@ -51,7 +53,7 @@ const HomeFeed = () => {
   ];
 
   return (
-    <>
+    <Layout>
       {showFollowSuggestions && (
         <FollowSuggestions />
       )}
@@ -61,7 +63,7 @@ const HomeFeed = () => {
         </div>
       ) : null}
       <Feed filterOptions={filterOptions} />
-    </>
+    </Layout>
   );
 };
 

@@ -3,7 +3,7 @@ import Embed from './index';
 const YouTube: Embed = {
   regex:
     /(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/|live\/))([\w-]{11})(?:\S+)?/g,
-  component: ({ match, index, key }) => {
+  component: ({ match, key }) => {
     return (
       <iframe
         key={key}

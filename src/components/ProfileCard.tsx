@@ -4,7 +4,7 @@ import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import Modal from '@/components/modal/Modal';
 import ProxyImg from '@/components/ProxyImg';
 import { mute, report } from '@/utils/user';
-import Link from 'next/link';
+import { Link } from "react-router-dom";
 
 import { useProfileContacts, useProfileContent, useProfileHex } from '@/hooks';
 
@@ -100,15 +100,15 @@ const ProfileCard = ({ profileAddress }: { profileAddress: string }) => {
             <div className="flex flex-wrap">
               <div className="ml-auto flex gap-2">
                 {isMyProfile ? (
-                  <Link href="/profile/edit" className="btn btn-sm gap-2">
+                  <Link to="/profile/edit" className="btn btn-sm gap-2">
                     Edit profile
                   </Link>
                 ) : (
                   <>
                     <Link
-                      prefetch={false}
+                     
                       className="btn btn-sm"
-                      href={`/messages/${profileAddress}`}
+                      to={`/messages/${profileAddress}`}
                     >
                       Message
                     </Link>
@@ -189,11 +189,11 @@ const ProfileCard = ({ profileAddress }: { profileAddress: string }) => {
           {latestContactEvent && (
             <>
               <div className="flex flex-wrap gap-3 text-xs">
-                <Link prefetch={false} href={`/following/${profileAddress}`}>
+                <Link to={`/following/${profileAddress}`}>
                   <b>{latestContactEvent?.tags?.length || 0}</b>
                   {` `}Following
                 </Link>
-                <Link prefetch={false} href={`/followers/${profileAddress}`}>
+                <Link to={`/followers/${profileAddress}`}>
                   <b>{followerCount}</b>
                   {` `}Followers
                 </Link>

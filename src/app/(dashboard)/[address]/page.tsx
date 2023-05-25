@@ -1,12 +1,15 @@
 import PostPage from '@/components/PostPage';
 import ProfilePage from '@/components/ProfilePage';
+import Layout from '@/app/(dashboard)/layout';
+import {useParams} from "react-router-dom";
 
-export const runtime = 'edge';
-
-export default function Address({ params }: { params: { address: string } }) {
-  if (params.address.startsWith('note')) {
-    return <PostPage address={params.address} />;
+export default function Address() {
+  const slug = useParams().slug as string;
+  let content;
+  if (slug?.startsWith('note')) {
+    content = <PostPage address={slug} />;
   } else {
-    return <ProfilePage address={params.address} />;
+    content = <ProfilePage address={slug} />;
   }
+  return <Layout>{content}</Layout>;
 }

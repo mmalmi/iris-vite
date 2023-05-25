@@ -5,7 +5,7 @@ import ProxyImg from '@/components/ProxyImg';
 
 const Image: Embed = {
   regex: /(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg|webp)(?:\?\S*)?)/gi,
-  component: ({ match, index, key }) => {
+  component: ({ match, key }) => {
     // dis bad?
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [showModal, setShowModal] = useState(false);

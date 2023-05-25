@@ -2,7 +2,7 @@ import Embed from './index';
 
 const Video: Embed = {
   regex: /(https?:\/\/.*\.(?:mp4|webm|ogg|mov)(?:\?\S*)?)/gi,
-  component: ({ match, index, key }) => (
+  component: ({ match, key }) => (
     <div
       key={key}
       className="relative w-full overflow-hidden object-contain my-2"

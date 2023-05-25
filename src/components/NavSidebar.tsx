@@ -1,7 +1,7 @@
 'use client';
 
 import { nip19 } from 'nostr-tools';
-import { usePathname } from 'next/navigation';
+import { useLocation } from 'react-router-dom';
 import Modal from '@/components/modal/Modal';
 import NewPostForm from '@/components/NewPostForm';
 
@@ -21,7 +21,7 @@ import {
   HeartIcon as HeartIconFull,
   PlusIcon,
 } from '@heroicons/react/24/solid';
-import Link from 'next/link';
+import { Link } from "react-router-dom";
 import useStore from '@/store';
 import Avatar from '@/components/Avatar';
 import Name from '@/components/Name';
@@ -50,7 +50,7 @@ export default function NavSidebar() {
   const userData = useStore((state) => state.auth.user.data);
   const loggedIn = !!userData?.publicKey;
   const npub = userData?.publicKey ? nip19.npubEncode(userData.publicKey) : '';
-  const pathname = usePathname();
+  const { pathname } = useLocation();
 
   const APPLICATIONS = [
     { url: '/', text: 'Home', icon: HomeIcon, activeIcon: HomeIconFull },
@@ -94,7 +94,7 @@ export default function NavSidebar() {
     <aside className="sticky top-0 z-20 h-screen max-h-screen hidden md:w-16 lg:w-64 flex-col px-2 py-4 md:flex justify-between">
       <div>
         <nav className="space-y-2 lg:space-y-1">
-          <Link href="/" className="flex items-center gap-3 px-2 mb-4">
+          <Link to="/" className="flex items-center gap-3 px-2 mb-4">
             <img className="rounded-full w-8" src="/img/icon128.png" />
 
             <h1 className="hidden lg:flex text-3xl">iris</h1>
@@ -106,7 +106,7 @@ export default function NavSidebar() {
             return (
               <div key={index}>
                 <Link
-                  href={a.url}
+                  to={a.url}
                   className={`${
                     a.className || ''
                   } inline-flex w-auto flex items-center space-x-4 p-3 rounded-full transition-colors duration-200 hover:bg-neutral-900`}
@@ -140,7 +140,7 @@ export default function NavSidebar() {
       {loggedIn ? (
         <div>
           <Link
-            href={`/${npub}`}
+            to={`/${npub}`}
             className="btn btn-ghost md:max-lg:btn-circle"
           >
             <Avatar pub={userData?.publicKey || ''} width="w-8" />

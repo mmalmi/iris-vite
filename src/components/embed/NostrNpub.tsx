@@ -1,5 +1,5 @@
 import Embed from './index';
-import Link from 'next/link';
+import { Link } from "react-router-dom";
 import Name from '@/components/Name';
 
 const pubKeyRegex =
@@ -7,13 +7,13 @@ const pubKeyRegex =
 
 const NostrNpub: Embed = {
   regex: pubKeyRegex,
-  component: ({ match, index, key }) => {
+  component: ({ match, key }) => {
     const pub = match.replace('@', '');
     return (
       <Link
-        prefetch={false}
+       
         key={key}
-        href={`/${pub}`}
+        to={`/${pub}`}
         className="text-iris-blue hover:underline mx-1"
       >
         <Name pub={pub} />

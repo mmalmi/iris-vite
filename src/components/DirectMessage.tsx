@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from 'react';
 import { Event, nip19, nip04 } from 'nostr-tools';
-import Link from 'next/link';
+import { Link } from "react-router-dom";
 import Avatar from '@/components/Avatar';
 import Name from '@/components/Name';
 import RelativeTime from '@/components/RelativeTime';
@@ -66,8 +66,8 @@ const DirectMessage = memo(
         : decrypted;
     return (
       <Link
-        prefetch={false}
-        href={`/messages/${npub}`}
+       
+        to={`/messages/${npub}`}
         key={event.id}
         className="flex items-center p-2 gap-4"
       >

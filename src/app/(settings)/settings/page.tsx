@@ -1,8 +1,9 @@
 'use client';
 
-import Link from 'next/link';
+import { Link } from "react-router-dom";
 import useStore from '@/store';
 import { nip19 } from 'nostr-tools';
+import Layout from '@/app/(settings)/layout';
 
 export default function Settings() {
   const userData = useStore((state) => state.auth.user.data);
@@ -13,47 +14,49 @@ export default function Settings() {
   const nsec = priv ? nip19.nsecEncode(priv) : '';
 
   return (
-    <div className="prose p-2">
-      <h2>Account</h2>
-      <p>
-        <Link href="/logout" className="btn btn-primary btn-sm">
-          Log out
-        </Link>
-      </p>
-      <h3>Public key</h3>
-      <p className="flex gap-2">
-        <button
-          className="btn btn-sm"
-          onClick={() => navigator.clipboard.writeText(pub)}
-        >
-          Copy hex
-        </button>
-        <button
-          className="btn btn-sm"
-          onClick={() => navigator.clipboard.writeText(npub)}
-        >
-          Copy npub
-        </button>
-      </p>
-      <h3>Private key</h3>
-      {priv ? (
+    <Layout>
+      <div className="prose p-2">
+        <h2>Account</h2>
+        <p>
+          <Link to="/logout" className="btn btn-primary btn-sm">
+            Log out
+          </Link>
+        </p>
+        <h3>Public key</h3>
         <p className="flex gap-2">
           <button
             className="btn btn-sm"
-            onClick={() => navigator.clipboard.writeText(priv)}
+            onClick={() => navigator.clipboard.writeText(pub)}
           >
             Copy hex
           </button>
           <button
             className="btn btn-sm"
-            onClick={() => navigator.clipboard.writeText(nsec)}
+            onClick={() => navigator.clipboard.writeText(npub)}
           >
-            Copy nsec
+            Copy npub
           </button>
         </p>
-      ) : (
-        <p>Not present. Good!</p>
-      )}
-    </div>
+        <h3>Private key</h3>
+        {priv ? (
+          <p className="flex gap-2">
+            <button
+              className="btn btn-sm"
+              onClick={() => navigator.clipboard.writeText(priv)}
+            >
+              Copy hex
+            </button>
+            <button
+              className="btn btn-sm"
+              onClick={() => navigator.clipboard.writeText(nsec)}
+            >
+              Copy nsec
+            </button>
+          </p>
+        ) : (
+          <p>Not present. Good!</p>
+        )}
+      </div>
+    </Layout>
   );
 }

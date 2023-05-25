@@ -1,10 +1,9 @@
 import Embed from './index';
-import Link from 'next/link';
 
 const Twitter: Embed = {
   regex:
     /(?:^|\s)(?:@)?(https?:\/\/twitter.com\/\w+\/status\/\d+\S*)(?![\w/])/g,
-  component: ({ match, index, key }) => {
+  component: ({ match, key }) => {
     return (
       <iframe
         style={{

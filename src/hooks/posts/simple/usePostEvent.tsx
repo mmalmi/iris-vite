@@ -10,7 +10,7 @@ const usePostEvent = (postId: string | undefined) => {
 
   const { events: postEvents, eose: postEose } = useSubscribe({
     relays,
-    filters: !!postId ? [{ ids: [postId] }] : [],
+    filters: postId ? [{ ids: [postId] }] : [],
     options: { enabled: !!postId },
   });
 

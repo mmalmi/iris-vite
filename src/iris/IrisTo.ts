@@ -38,8 +38,8 @@ export default {
     return;
   },
 
-  setAsPrimary(name: string) {
-    const newNip = name + '@iris.to';
+  setAsPrimary(_name: string) { // TODO
+    // const newNip = name + '@iris.to';
     /*
     const timeout = setTimeout(() => {
       SocialNetwork.setMetadata({ nip05: newNip });

@@ -10,7 +10,7 @@ import {
   BoltIcon as BoltIconFull,
   HeartIcon as HeartIconFull,
 } from '@heroicons/react/24/solid';
-import Link from 'next/link';
+import { Link } from "react-router-dom";
 import { isRepost } from '@/utils/event';
 import usePublish from '@/hooks/usePublish';
 import useStore from '@/store';
@@ -40,8 +40,8 @@ const Reaction = memo(
     console.log('amount', amount, 'invoice', invoice, 'event', event);
     return (
       <Link
-        prefetch={false}
-        href={`/${nip19.npubEncode(reactor)}`}
+       
+        to={`/${nip19.npubEncode(reactor)}`}
         key={event.id}
         className="flex items-center gap-4"
       >
@@ -235,8 +235,8 @@ const Reactions = ({
         )}
 
         <Link
-          prefetch={false}
-          href={`/${nip19NoteId}`}
+         
+          to={`/${nip19NoteId}`}
           className="btn-ghost hover:bg-transparent text-neutral-500 hover:text-iris-blue btn w-1/4 content-center gap-2 rounded-none p-2"
         >
           <ChatBubbleOvalLeftIcon width={18} />

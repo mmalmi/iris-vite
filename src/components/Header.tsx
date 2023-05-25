@@ -1,9 +1,9 @@
 'use client';
 
-import Link from 'next/link';
+import { Link } from "react-router-dom";
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { ArrowLeftIcon, Cog8ToothIcon } from '@heroicons/react/24/solid';
-import { usePathname, useParams } from 'next/navigation';
+import { useLocation, useParams } from "react-router-dom";
 import Name from '@/components/Name';
 import useStore from '@/store';
 import React, { MouseEventHandler } from 'react';
@@ -22,10 +22,10 @@ const NotLoggedInHeader = () => {
         iris
       </div>
       <div className="w-full flex items-center justify-end gap-2 p-2 h-14">
-        <Link href="/login" className="btn btn-sm btn-primary">
+        <Link to="/login" className="btn btn-sm btn-primary">
           Log in
         </Link>
-        <Link href="/signup" className="btn btn-sm">
+        <Link to="/signup" className="btn btn-sm">
           Sign up
         </Link>
       </div>
@@ -43,7 +43,7 @@ const HomeHeader = () => {
       <div className="hidden md:flex w-full flex items-center justify-center gap-2 p-3 mr-16 md:mr-0 h-14">
         Home
       </div>
-      <Link href="/notifications" className="md:hidden items-center py-3 px-4">
+      <Link to="/notifications" className="md:hidden items-center py-3 px-4">
         <HeartIcon width={28} />
       </Link>
     </>
@@ -51,13 +51,13 @@ const HomeHeader = () => {
 };
 
 const BackNavHeader = () => {
-  const pathname = usePathname();
-  const params = useParams();
+  const { pathname } = useLocation();
+  const slug = useParams().slug || '/';
   const userData = useStore((state) => state.auth.user.data);
 
   let title: string | JSX.Element = pathname.split('/')[1];
-  if (pathname.startsWith('/npub') && params.address) {
-    title = <Name key={params.address} pub={params.address} />;
+  if (pathname.startsWith('/npub') && slug) {
+    title = <Name key={slug} pub={slug} />;
   } else if (pathname.startsWith('/note')) {
     title = 'Post';
   } else if (pathname === '/profile/edit') {
@@ -68,12 +68,12 @@ const BackNavHeader = () => {
     const keyword = pathname.split('/')[2];
     title = `Search: ${decodeURIComponent(keyword)}`;
   } else {
-    title = title.charAt(0).toUpperCase() + title.slice(1);
+    title = (title as string).charAt(0).toUpperCase() + (title as string).slice(1);
   }
 
   const isMyProfile =
     pathname.startsWith('/npub') &&
-    toHexKey(params.address) === userData?.publicKey;
+    toHexKey(slug) === userData?.publicKey;
 
   return (
     <>
@@ -91,7 +91,7 @@ const BackNavHeader = () => {
       </div>
       {isMyProfile && (
         <div className="md:hidden flex items-center gap-2 p-3">
-          <Link href="/settings">
+          <Link to="/settings">
             <Cog8ToothIcon width={28} />
           </Link>
         </div>
@@ -112,7 +112,7 @@ const scrollUp: MouseEventHandler = (e) => {
 };
 
 const Header = () => {
-  const pathname = usePathname();
+  const { pathname } = useLocation();
   const userData = useStore((state) => state.auth.user.data);
 
   let content;

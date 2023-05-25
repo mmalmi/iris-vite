@@ -1,6 +1,6 @@
 "use client";
 "use strict";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Relay } from 'nostr-tools';
 import { useProfileContacts } from "@/hooks";
 import useStore from "@/store";

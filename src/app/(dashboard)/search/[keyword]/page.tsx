@@ -4,7 +4,7 @@ import Feed from '@/components/Feed';
 import useStore from '@/store';
 import { Event, Filter } from 'nostr-tools';
 
-export const runtime = 'edge';
+
 
 const SEARCH_RELAYS = ['wss://relay.nostr.band'];
 

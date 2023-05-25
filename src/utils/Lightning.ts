@@ -1,4 +1,3 @@
-import { bytesToHex } from '@noble/hashes/utils';
 //@ts-ignore
 import { decode as invoiceDecode } from 'light-bolt11-decoder';
 import { Event } from 'nostr-tools';
