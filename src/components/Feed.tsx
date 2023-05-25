@@ -54,15 +54,19 @@ const Feed = ({ showDisplayAs, relays, filterOptions }: Props) => {
 
   const defaultRelays = useStore((store) => store.relays);
 
-  let { events, loadMore, eose } = useSubscribe({
+  const { events: allEvents, loadMore, eose, invalidate } = useSubscribe({
     filters: [filter.filter],
     relays: relays || defaultRelays,
-    options: { invalidate: true, force: true, closeAfterEose: false },
+    options: { cacheRefresh: true, force: true, closeAfterEose: false },
   });
 
+  useEffect(() => {
+    invalidate();
+  }, [filter]);
+
   // deduplicate
-  events = useMemo(() => {
-    const deduped = events
+  const events = useMemo(() => {
+    const deduped = allEvents
       .filter((event) => {
         if (mutedUsers[event.pubkey]) {
           return false;
@@ -79,7 +83,7 @@ const Feed = ({ showDisplayAs, relays, filterOptions }: Props) => {
         return acc;
       }, [] as any[]);
     return deduped;
-  }, [events, filter]);
+  }, [allEvents, filter]);
 
   const isEmpty = eose && events.length === 0;
 

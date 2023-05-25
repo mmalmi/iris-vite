@@ -62,7 +62,7 @@ const HomeFeed = () => {
           <NewPostForm />
         </div>
       ) : null}
-      <Feed filterOptions={filterOptions} />
+      <Feed key={`feed${authors.length}`} filterOptions={filterOptions} />
     </Layout>
   );
 };

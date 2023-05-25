@@ -26,7 +26,7 @@ const MessageThread = ({ params }: { params: { address: string } }) => {
     options: {
       force: true,
       closeAfterEose: false,
-      invalidate: true,
+      cacheRefresh: true,
       enabled: !!myPub,
     },
   });

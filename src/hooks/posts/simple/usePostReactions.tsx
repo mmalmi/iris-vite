@@ -14,7 +14,7 @@ const usePostReactions = (postId: string | undefined) => {
     options: {
       closeAfterEose: false,
       enabled: !!postId,
-      invalidate: false, // TODO: true causes a refresh loop bug in post reactions
+      cacheRefresh: true,
       batchingInterval: 2000,
     },
   });
