@@ -118,18 +118,27 @@ const Reactions = ({
     );
   }, [reactionEvents, myPub]);
 
-  const likes = reactionEvents.filter((event) => event.kind === 7);
-  const reposts = reactionEvents.filter((event) => isRepost(event));
-  const zaps = reactionEvents.filter((event) => event.kind === 9735);
-  const replies = reactionEvents.filter(
-    (event) => event.kind === 1 && !isRepost(event)
-  );
+  const likes = useMemo(() =>
+    reactionEvents.filter((event) => event.kind === 7)
+  , [reactionEvents]);
+
+  const reposts = useMemo(() =>
+    reactionEvents.filter((event) => isRepost(event))
+  , [reactionEvents]);
+
+  const zaps = useMemo(() =>
+    reactionEvents.filter((event) => event.kind === 9735)
+  , [reactionEvents]);
+
+  const replies = useMemo(() =>
+    reactionEvents.filter((event) => event.kind === 1 && !isRepost(event))
+  , [reactionEvents]);
   const hasReactions =
     likes.length > 0 || reposts.length > 0 || zaps.length > 0;
   const metadata = useProfileMetadata(event.pubkey).metadata;
   const lightning = metadata.lud16 || metadata.lud06;
 
-  const totalZapAmount: number = useMemo(
+  const totalZapAmount = useMemo(
     () =>
       zaps.reduce((acc, event) => {
         const invoice = event.tags?.find((tag) => tag[0] === 'bolt11')?.[1];
@@ -137,6 +146,10 @@ const Reactions = ({
         return amount ? acc + amount : acc;
       }, 0),
     [zaps]
+  );
+  const formattedAmount = useMemo(
+    () => formatAmount(totalZapAmount / 1000),
+    [totalZapAmount]
   );
 
   // in standalone, show twitter-like listings that open the modal
@@ -205,7 +218,7 @@ const Reactions = ({
                   {totalZapAmount > 0 && (
                     <small className="text-neutral-500">
                       {' '}
-                      ({formatAmount(totalZapAmount / 1000)})
+                      ({formattedAmount})
                     </small>
                   )}
                 </a>
@@ -271,4 +284,4 @@ const Reactions = ({
   );
 };
 
-export default Reactions;
+export default memo(Reactions);

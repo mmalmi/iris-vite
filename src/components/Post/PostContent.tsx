@@ -1,7 +1,5 @@
-
-
 import { Event } from 'nostr-tools';
-import { useState } from 'react';
+import { useState, memo } from 'react';
 
 import Spinner from '../Spinner';
 import HyperText from '@/components/HyperText';
@@ -55,4 +53,4 @@ const PostContent = ({
   );
 };
 
-export default PostContent;
+export default memo(PostContent);

@@ -3,11 +3,12 @@
 import { useSubscribe } from 'nostr-hooks';
 
 import useStore from '@/store';
+import {useMemo} from "react";
 
 const usePostReactions = (postId: string | undefined) => {
   const relays = useStore((store) => store.relays);
 
-  let { events: reactionEvents, eose: reactionEose } = useSubscribe({
+  const { events, eose } = useSubscribe({
     relays,
     filters: postId ? [{ '#e': [postId], kinds: [1, 6, 7, 9735] }] : [],
     options: {
@@ -19,21 +20,25 @@ const usePostReactions = (postId: string | undefined) => {
   });
 
   // only 1 like or repost per author. TODO kind 1 reposts
-  reactionEvents = reactionEvents.filter((event, index, self) => {
-    if (event.kind === 1 || event.kind === 9735) return true;
-    return (
-      self.findIndex(
-        (e) => e.pubkey === event.pubkey && e.kind === event.kind
-      ) === index
-    );
-  });
+  const reactionEvents = useMemo(
+    () =>
+      events.filter((event, index, self) => {
+        if (event.kind === 1 || event.kind === 9735) return true;
+        return (
+          self.findIndex(
+            (e) => e.pubkey === event.pubkey && e.kind === event.kind
+          ) === index
+        );
+      }),
+    [events]
+  );
 
-  const isFetchingReactions = !reactionEose && !reactionEvents.length;
-  const isReactionsEmpty = reactionEose && !reactionEvents.length;
+  const isFetchingReactions = !eose && !reactionEvents.length;
+  const isReactionsEmpty = eose && !reactionEvents.length;
 
   return {
     reactionEvents,
-    reactionEose,
+    reactionEose: eose,
     isFetchingReactions,
     isReactionsEmpty,
   };

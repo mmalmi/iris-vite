@@ -245,13 +245,11 @@ const PostCard = ({
                   <Name pub={tag[1]} />
                 </Link>
               ))}
-              {replyingToUsers.length > 3 ? (
+              {replyingToUsers.length > 3 && (
                 <span className="opacity-50">
                   {' '}
                   and {replyingToUsers.length - 3} more
                 </span>
-              ) : (
-                ''
               )}
             </small>
           ) : (
@@ -266,24 +264,20 @@ const PostCard = ({
           </div>
         </div>
 
-        {!asInlineQuote ? (
+        {!asInlineQuote && (
           <Reactions
             standalone={standalone || false}
             event={postEvent}
             reactionEvents={sortedReactions}
             nip19NoteId={nip19NoteId}
           />
-        ) : (
-          ''
         )}
       </CardContainer>
-      {showReplyForm ? (
+      {showReplyForm && (
         <>
           <NewPostForm placeholder="Write your reply" replyingTo={postEvent} />
           <hr className="-mx-4 mt-2 opacity-10" />
         </>
-      ) : (
-        ''
       )}
       {showReplies
         ? replies
