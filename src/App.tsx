@@ -13,6 +13,8 @@ import EditProfile from './app/(dashboard)/profile/edit/page';
 import NewPost from './app/(dashboard)/post/page';
 import Search from './app/(dashboard)/search/page';
 import SearchResults from './app/(dashboard)/search/[keyword]/page';
+import Followers from './app/(dashboard)/followers/[address]/page';
+import Following from './app/(dashboard)/following/[address]/page';
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/search/:keyword" element={<SearchResults />} />
         <Route path="/notifications" element={<Notifications />} />
+        <Route path="/followers/:address" element={<Followers />} />
+        <Route path="/following/:address" element={<Following />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/about" element={<About />} />
         <Route path="/profile/edit" element={<EditProfile />} />
