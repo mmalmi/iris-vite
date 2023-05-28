@@ -7,6 +7,8 @@ import Messages from './app/(messages)/messages/page';
 import MessageThread from './app/(messages)/messages/[address]/page';
 import SettingsLayout from './app/(settings)/layout';
 import Settings from './app/(settings)/settings/page';
+import RelaySettings from './app/(settings)/settings/relays/page';
+import IrisSettings from './app/(settings)/settings/iris/page';
 import About from './app/(dashboard)/about/page';
 import AuthLayout from './app/(auth)/layout';
 import Login from './app/(auth)/login/page';
@@ -35,6 +37,8 @@ function App() {
         </Route>
         <Route path="/settings/*" element={<SettingsLayout />}>
           <Route path="" element={<Settings />} />
+          <Route path="relays" element={<RelaySettings />} />
+          <Route path="iris" element={<IrisSettings />} />
         </Route>
         <Route path="/*" element={<DashboardLayout />}>
           <Route path="" element={<Home />} />
