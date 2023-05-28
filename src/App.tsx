@@ -26,7 +26,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/auth/*" element={<AuthLayout />}>
+        <Route path="/*" element={<AuthLayout />}>
           <Route path="login" element={<Login />} />
           <Route path="logout" element={<Logout />} />
           <Route path="signup" element={<Signup />} />
