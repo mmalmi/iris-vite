@@ -2,12 +2,9 @@ import NavSidebar from '@/components/NavSidebar';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Link } from "react-router-dom";
+import { Outlet } from 'react-router-dom';
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function DashboardLayout() {
   return (
     <>
       <main className="flex justify-center">
@@ -27,7 +24,9 @@ export default function DashboardLayout({
                   iris.to
                 </Link>
               </div>
-              <div className="w-full overflow-x-hidden">{children}</div>
+              <div className="w-full overflow-x-hidden">
+                <Outlet />
+              </div>
             </div>
           </section>
           <Footer />

@@ -10,8 +10,6 @@ import Name from '@/components/Name';
 import FollowButton from '@/components/FollowButton';
 import { useProfileHex } from '@/hooks';
 
-import Layout from '@/app/(dashboard)/layout';
-
 const Profile = () => {
   const params = useParams();
   const [followers, setFollowers] = useState([]);
@@ -31,25 +29,23 @@ const Profile = () => {
   }, [hex]);
 
   return (
-    <Layout>
-      <div className="flex flex-col gap-4 p-2">
-        {followers.map((follower) => (
-          <div
-            key={follower}
-            className="flex items-center w-full justify-between"
+    <div className="flex flex-col gap-4 p-2">
+      {followers.map((follower) => (
+        <div
+          key={follower}
+          className="flex items-center w-full justify-between"
+        >
+          <Link
+            to={`/${nip19.npubEncode(follower)}`}
+            className="flex gap-4 items-center"
           >
-            <Link
-              to={`/${nip19.npubEncode(follower)}`}
-              className="flex gap-4 items-center"
-            >
-              <Avatar pub={follower} />
-              <Name pub={follower} />
-            </Link>
-            <FollowButton pub={follower} />
-          </div>
-        ))}
-      </div>
-    </Layout>
+            <Avatar pub={follower} />
+            <Name pub={follower} />
+          </Link>
+          <FollowButton pub={follower} />
+        </div>
+      ))}
+    </div>
   );
 };
 

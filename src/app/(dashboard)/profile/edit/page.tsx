@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { nip19 } from 'nostr-tools';
 import usePublish from '@/hooks/usePublish';
@@ -8,7 +6,6 @@ import CardContainer from '@/components/CardContainer';
 import { useProfileMetadata } from '@/hooks';
 import Upload from '@/components/Upload';
 import { useNavigate } from "react-router-dom";
-import Layout from "@/app/(dashboard)/layout";
 
 const IMAGE_FIELDS = ['picture', 'banner'];
 
@@ -154,7 +151,7 @@ const EditProfile = () => {
   };
 
   return (
-    <Layout>
+    <>
       <CardContainer>
         <div className="prose">
           <form onSubmit={handleSubmit} className="w-full">
@@ -195,7 +192,7 @@ const EditProfile = () => {
           </form>
         </div>
       </CardContainer>
-    </Layout>
+    </>
   );
 };
 

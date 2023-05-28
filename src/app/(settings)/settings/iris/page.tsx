@@ -1,5 +1,3 @@
-
-
 import useStore from '@/store';
 import IrisTo from '@/iris/IrisTo';
 import { useEffect, useState } from 'react';

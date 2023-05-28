@@ -1,9 +1,6 @@
-
-
 import { Link } from "react-router-dom";
 import useStore from '@/store';
 import { nip19 } from 'nostr-tools';
-import Layout from '@/app/(settings)/layout';
 
 export default function Settings() {
   const userData = useStore((state) => state.auth.user.data);
@@ -14,7 +11,7 @@ export default function Settings() {
   const nsec = priv ? nip19.nsecEncode(priv) : '';
 
   return (
-    <Layout>
+    <>
       <div className="prose p-2">
         <h2>Account</h2>
         <p>
@@ -57,6 +54,6 @@ export default function Settings() {
           <p>Not present. Good!</p>
         )}
       </div>
-    </Layout>
+    </>
   );
 }

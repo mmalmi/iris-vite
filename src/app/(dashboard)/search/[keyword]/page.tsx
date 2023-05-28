@@ -2,7 +2,6 @@ import Feed from '@/components/Feed';
 import useStore from '@/store';
 import { Event, Filter } from 'nostr-tools';
 import {useParams} from "react-router-dom";
-import Layout from "@/app/(dashboard)/layout";
 
 const SEARCH_RELAYS = ['wss://relay.nostr.band'];
 
@@ -18,8 +17,8 @@ export default function Search() {
   const filterOptions = [{ name: 'Search', filter, filterFn }];
 
   return (
-    <Layout>
+    <>
       <Feed filterOptions={filterOptions} relays={relays} />
-    </Layout>
+    </>
   );
 }

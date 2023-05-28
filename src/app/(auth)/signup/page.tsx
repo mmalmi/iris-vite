@@ -1,11 +1,8 @@
-
-
 import { useNavigate } from "react-router-dom";
 import { generatePrivateKey } from 'nostr-tools';
 import { useCallback, useEffect, useState } from 'react';
 import EULA from './EULA';
 import localState from "@/utils/LocalState";
-import Layout from '@/app/(auth)/layout';
 
 import CardContainer from '@/components/CardContainer';
 
@@ -61,7 +58,7 @@ const Login = () => {
   }, [isStandalone]);
 
   return (
-    <Layout>
+    <>
       {showEula && (
         <EULA
           onAccept={() => {
@@ -103,7 +100,7 @@ const Login = () => {
           </Link>
         </p>
       </CardContainer>
-    </Layout>
+    </>
   );
 };
 

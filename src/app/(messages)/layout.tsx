@@ -1,12 +1,9 @@
 import NavSidebar from '@/components/NavSidebar';
 import ChatList from './ChatList';
 import Header from '@/components/Header';
+import { Outlet } from 'react-router-dom';
 
-export default function MessagesLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function MessagesLayout() {
   return (
     <>
       <main className="flex justify-center">
@@ -19,7 +16,7 @@ export default function MessagesLayout({
                 <ChatList />
               </aside>
               <div className="flex w-full overflow-x-hidden h-screen">
-                {children}
+                <Outlet />
               </div>
             </div>
           </section>

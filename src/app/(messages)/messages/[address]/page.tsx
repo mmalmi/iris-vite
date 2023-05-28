@@ -6,7 +6,6 @@ import DirectMessage from '@/components/DirectMessage';
 import { PaperAirplaneIcon } from '@heroicons/react/24/outline';
 import { FormEventHandler, useState } from 'react';
 import {useParams} from "react-router-dom";
-import Layout from '@/app/(messages)/layout';
 
 const MessageThread = () => {
   const user = useParams().user as string;
@@ -57,7 +56,7 @@ const MessageThread = () => {
     return <div className="p-2 text-neutral-500">Nothing here yet</div>;
 
   return (
-    <Layout>
+    <>
       <div className="flex flex-col space-y-2 h-full max-h-full justify-end pb-16">
         <div>
           {events
@@ -91,7 +90,7 @@ const MessageThread = () => {
           </button>
         </form>
       </div>
-    </Layout>
+    </>
   );
 };
 

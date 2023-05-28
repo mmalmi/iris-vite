@@ -1,10 +1,7 @@
-
-
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useCallback, useEffect } from 'react';
 import { nip19 } from 'nostr-tools';
-import Layout from '@/app/(auth)/layout';
 
 import CardContainer from '@/components/CardContainer';
 
@@ -51,7 +48,7 @@ const Login = () => {
   }, [loginWithPublicKey]);
 
   return (
-    <Layout>
+    <>
       <CardContainer>
         <div className="flex items-baseline gap-2">
           <h1 className="text-2xl font-bold md:text-4xl">iris</h1>
@@ -89,7 +86,7 @@ const Login = () => {
           </Link>
         </p>
       </CardContainer>
-    </Layout>
+    </>
   );
 };
 
