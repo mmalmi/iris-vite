@@ -34,7 +34,7 @@ const HomeFeed = () => {
       filter: {
         kinds: [1],
         authors,
-        limit: 100,
+        limit: 10,
       },
       filterFn: (event: Event) => !getReplyingToEvent(event),
     },
@@ -43,7 +43,7 @@ const HomeFeed = () => {
       filter: {
         kinds: [1, 6],
         authors,
-        limit: 100,
+        limit: 10,
       },
     },
   ];

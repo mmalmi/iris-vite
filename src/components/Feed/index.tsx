@@ -161,7 +161,7 @@ const Feed = ({ showDisplayAs, relays, filterOptions }: Props) => {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [modalItemIndex]);
-  
+
   const renderFilterOptions = () => {
     return (
       <div className="flex mb-4 gap-2 mx-2 md:mx-0">

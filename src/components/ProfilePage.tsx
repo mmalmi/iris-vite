@@ -38,16 +38,16 @@ const ProfilePage = ({ address }: { address: string }) => {
   const filterOptions: FilterOption[] = [
     {
       name: 'Posts',
-      filter: { kinds: [1], authors: [profileHex], limit: 100 },
+      filter: { kinds: [1], authors: [profileHex], limit: 10 },
       filterFn: (event: Event) => !getReplyingToEvent(event),
     },
     {
       name: 'Posts & replies',
-      filter: { kinds: [1, 6], authors: [profileHex], limit: 100 },
+      filter: { kinds: [1, 6], authors: [profileHex], limit: 10 },
     },
     {
       name: 'Likes',
-      filter: { kinds: [7], authors: [profileHex], limit: 100 },
+      filter: { kinds: [7], authors: [profileHex], limit: 10 },
     },
   ];
 

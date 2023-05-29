@@ -6,6 +6,7 @@ import { nip19 } from 'nostr-tools';
 import CardContainer from '@/components/CardContainer';
 
 import useStore from '@/store';
+import localState from "@/utils/LocalState";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const Login = () => {
 
   useEffect(() => {
     if (data) {
+      localState.get('showFollowSuggestions').set(false);
       navigate('/');
     }
   }, [data]);
