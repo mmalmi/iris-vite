@@ -1,11 +1,10 @@
-
-
 import { useProfileContent } from '@/hooks';
 import ProxyImg from '@/components/ProxyImg';
+import { memo } from 'react';
 
 type Width = 'w-6' | 'w-8' | 'w-12' | 'w-14' | 'w-24' | 'w-36';
 
-export function BaseAvatar({
+const BaseAvatar = memo(function BaseAvatar({
   url,
   width = 'w-12',
 }: {
@@ -21,9 +20,9 @@ export function BaseAvatar({
       </div>
     </>
   );
-}
+});
 
-export default function Avatar({
+function Avatar({
   pub,
   width = 'w-12',
 }: {
@@ -34,3 +33,6 @@ export default function Avatar({
 
   return <BaseAvatar url={picture} width={width} />;
 }
+
+export default memo(Avatar);
+export { BaseAvatar };

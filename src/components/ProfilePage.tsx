@@ -1,5 +1,3 @@
-
-
 import {memo, useEffect} from 'react';
 
 import {useProfileContent, useProfileHex} from '@/hooks';

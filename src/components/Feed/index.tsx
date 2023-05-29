@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useMemo } from 'react';
+import { useState, useRef, useEffect, useMemo, memo } from 'react';
 import { Filter } from 'nostr-tools';
 import { useLocalState } from '@/utils/LocalState';
 import Image from '@/components/embed/Image';
@@ -66,7 +66,7 @@ const Feed = ({ showDisplayAs, relays, filterOptions }: Props) => {
 
   // deduplicate
   const events = useMemo(() => {
-    const deduped = allEvents
+    const filtered = allEvents
       .filter((event) => {
         if (mutedUsers[event.pubkey]) {
           return false;
@@ -76,13 +76,8 @@ const Feed = ({ showDisplayAs, relays, filterOptions }: Props) => {
         }
         return true;
       })
-      .reduce((acc, event) => {
-        if (!acc.some((e) => e.id === event.id)) {
-          acc.push(event);
-        }
-        return acc;
-      }, [] as any[]);
-    return deduped;
+      .sort((a, b) => b.created_at - a.created_at);
+    return filtered;
   }, [allEvents, filter]);
 
   const isEmpty = eose && events.length === 0;
@@ -135,7 +130,6 @@ const Feed = ({ showDisplayAs, relays, filterOptions }: Props) => {
         );
         return [...imageMatches, ...videoMatches];
       })
-      .sort((a, b) => b.created_at - a.created_at)
       .slice(0, displayCount);
   }, [events, displayCount, displayAs]) as ImageOrVideo[];
 
@@ -167,6 +161,8 @@ const Feed = ({ showDisplayAs, relays, filterOptions }: Props) => {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [modalItemIndex]);
+
+  if (!eose) return null;
 
   const renderFilterOptions = () => {
     return (
@@ -321,7 +317,6 @@ const Feed = ({ showDisplayAs, relays, filterOptions }: Props) => {
         {displayAs === 'grid'
           ? renderGrid()
           : events
-              .sort((a, b) => b.created_at - a.created_at)
               .slice(0, displayCount)
               .map((postEvent, index, self) => {
                 const isLastElement = index === self.length - 1;
@@ -339,4 +334,4 @@ const Feed = ({ showDisplayAs, relays, filterOptions }: Props) => {
   );
 };
 
-export default Feed;
+export default memo(Feed);

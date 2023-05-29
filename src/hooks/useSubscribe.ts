@@ -72,11 +72,19 @@ localState.get('useRelayPool').on((value: any) => {
   useRelayPool = !!value;
 });
 
+// let i = 0;
+
 export default function useSubscribe(opts: any) {
   const relayPoolSubscribe = useRelayPoolSubscribe({...opts, enabled: useRelayPool });
   const nostrHooksSubscribe = useNostrHooksSubscribe({...opts, enabled: !useRelayPool });
 
+  /*
   console.log('useRelayPool', useRelayPool);
+  i++;
+  if (i > 100000) {
+    debugger;
+  }
+   */
 
   return useRelayPool ? relayPoolSubscribe : nostrHooksSubscribe;
 }
