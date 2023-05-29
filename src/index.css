@@ -18,3 +18,7 @@ input[type='number'] {
 iframe {
   @apply rounded-sm my-4 w-full;
 }
+
+img, video {
+  user-select: none;
+}
