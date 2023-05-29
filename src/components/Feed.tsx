@@ -10,7 +10,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import PostCard from '@/components/Post/PostCard';
 import Modal from '@/components/modal/Modal';
 import useStore from '@/store';
-import { useSubscribe } from 'nostr-hooks';
+import useSubscribe from '@/hooks/useSubscribe'
 
 const PAGE_SIZE = 6;
 const LOAD_MORE_MARGIN = '0px 0px 2000px 0px';

@@ -1,6 +1,6 @@
 import { nip19, nip04 } from 'nostr-tools';
 
-import { useSubscribe, usePublish } from 'nostr-hooks';
+import { usePublish, useSubscribe } from '@/hooks';
 import useStore from '@/store';
 import DirectMessage from '@/components/DirectMessage';
 import { PaperAirplaneIcon } from '@heroicons/react/24/outline';
@@ -39,7 +39,7 @@ const MessageThread = () => {
     return encrypted;
   };
 
-  const publish = usePublish(relays);
+  const publish = usePublish();
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();

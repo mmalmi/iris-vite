@@ -9,6 +9,7 @@ import SettingsLayout from './app/(settings)/layout';
 import Settings from './app/(settings)/settings/page';
 import RelaySettings from './app/(settings)/settings/relays/page';
 import IrisSettings from './app/(settings)/settings/iris/page';
+import DevSettings from './app/(settings)/settings/dev/page';
 import About from './app/(dashboard)/about/page';
 import AuthLayout from './app/(auth)/layout';
 import Login from './app/(auth)/login/page';
@@ -39,6 +40,7 @@ function App() {
           <Route path="" element={<Settings />} />
           <Route path="relays" element={<RelaySettings />} />
           <Route path="iris" element={<IrisSettings />} />
+          <Route path="dev" element={<DevSettings />} />
         </Route>
         <Route path="/*" element={<DashboardLayout />}>
           <Route path="" element={<Home />} />

@@ -1,6 +1,4 @@
-
-
-import { useSubscribe } from 'nostr-hooks';
+import useSubscribe from '@/hooks/useSubscribe'
 
 import useStore from '@/store';
 import {useMemo} from "react";

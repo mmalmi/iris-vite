@@ -1,5 +1,3 @@
-
-
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Event, nip19 } from 'nostr-tools';

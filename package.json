@@ -24,6 +24,7 @@
     "light-bolt11-decoder": "^3.0.0",
     "lodash": "^4.17.21",
     "nostr-hooks": "^1.8.0",
+    "nostr-relaypool": "^0.6.28",
     "nostr-tools": "^1.11.1",
     "qr-code-styling": "^1.6.0-rc.1",
     "react": "18.2.0",

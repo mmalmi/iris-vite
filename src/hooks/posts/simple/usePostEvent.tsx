@@ -1,6 +1,4 @@
-
-
-import { useSubscribe } from 'nostr-hooks';
+import useSubscribe from '@/hooks/useSubscribe'
 import { nip19 } from 'nostr-tools';
 
 import useStore from '@/store';

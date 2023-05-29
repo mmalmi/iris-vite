@@ -5,7 +5,7 @@ import { Event } from 'nostr-tools';
 import useStore from '@/store';
 
 import DirectMessage from '@/components/DirectMessage';
-import { useSubscribe } from 'nostr-hooks';
+import useSubscribe from '@/hooks/useSubscribe'
 
 export default function ChatList() {
   const relays = useStore((store) => store.relays);
