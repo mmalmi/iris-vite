@@ -16,12 +16,14 @@ interface Props {
   onSubmit?: (event: Event) => void;
   replyingTo?: Event;
   placeholder?: string;
+  autoFocus?: boolean;
 }
 
 const NewPostForm: React.FC<Props> = ({
   onSubmit,
   replyingTo,
   placeholder,
+  autoFocus = false,
 }) => {
   const [postText, setPostText] = useLocalState('newPostDraft', '');
   const [isExpanded, setIsExpanded] = useState(false);
@@ -93,6 +95,7 @@ const NewPostForm: React.FC<Props> = ({
           </Link>
           <div className="flex-grow">
             <textarea
+              autoFocus={autoFocus}
               ref={textAreaRef}
               onFocus={() => setIsExpanded(true)}
               id="postText"
