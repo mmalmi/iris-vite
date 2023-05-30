@@ -83,10 +83,6 @@ const Feed = ({ showDisplayAs, relays, filterOptions }: Props) => {
   const isEmpty = eose && events.length === 0;
 
   useEffect(() => {
-    if (events.length < PAGE_SIZE) {
-      return;
-    }
-
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
       const entry = entries[0];
       if (entry.isIntersecting) {
