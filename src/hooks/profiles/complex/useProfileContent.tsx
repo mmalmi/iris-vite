@@ -42,7 +42,7 @@ const useProfileContent = (profileAddress: string | undefined) => {
     });
 
     setNpub((!!profileAddress && nip19.npubEncode(hex)) || undefined);
-  }, [hex, latestMetadataEvent?.content, profileAddress]);
+  }, [hex, latestMetadataEvent?.content]);
 
   return {
     ...author,

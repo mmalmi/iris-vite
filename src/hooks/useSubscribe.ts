@@ -26,7 +26,6 @@ const useRelayPoolSubscribe = (ops: {
   let initalRelayPool = ops.relayPool;
   if (!initalRelayPool) {
     if (!globalRelayPool) {
-      console.log('init relaypool');
       globalRelayPool = new RelayPool(undefined, { logErrorsAndNotices: true });
     }
     initalRelayPool = globalRelayPool;
@@ -52,7 +51,7 @@ const useRelayPoolSubscribe = (ops: {
         //
       });
     });
-  }, []);
+  }, [enabled]);
 
   const invalidate = () => {
     setEvents([]);
@@ -72,19 +71,9 @@ localState.get('useRelayPool').on((value: any) => {
   useRelayPool = !!value;
 });
 
-// let i = 0;
-
 export default function useSubscribe(opts: any) {
   const relayPoolSubscribe = useRelayPoolSubscribe({...opts, enabled: useRelayPool });
   const nostrHooksSubscribe = useNostrHooksSubscribe({...opts, enabled: !useRelayPool });
-
-  /*
-  console.log('useRelayPool', useRelayPool);
-  i++;
-  if (i > 100000) {
-    debugger;
-  }
-   */
 
   return useRelayPool ? relayPoolSubscribe : nostrHooksSubscribe;
 }
