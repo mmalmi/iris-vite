@@ -9,6 +9,20 @@ import localState from "@/utils/LocalState";
 
 let globalRelayPool: RelayPool | null = null;
 
+const DEFAULT_RELAYS = [
+  'wss://eu.rbr.bio',
+  'wss://us.rbr.bio',
+  'wss://relay.damus.io',
+  'wss://relay.snort.social',
+  'wss://eden.nostr.land',
+  'wss://relay.nostr.info',
+  'wss://offchain.pub',
+  'wss://nostr-pub.wellorder.net',
+  'wss://nostr.fmt.wiz.biz',
+  'wss://nos.lol',
+];
+
+
 const useRelayPoolSubscribe = (ops: {
   relays: string[];
   filters: Filter[];
@@ -26,13 +40,15 @@ const useRelayPoolSubscribe = (ops: {
   let initalRelayPool = ops.relayPool;
   if (!initalRelayPool) {
     if (!globalRelayPool) {
-      globalRelayPool = new RelayPool(undefined, { logErrorsAndNotices: true });
+      globalRelayPool = new RelayPool(DEFAULT_RELAYS, { useEventCache: true, logErrorsAndNotices: true });
     }
     initalRelayPool = globalRelayPool;
   }
 
   const [relayPool] = useState<RelayPool>(initalRelayPool);
   const [unsubscribe, setUnsubscribe] = useState<() => void>(() => () => {});
+
+  options.allowDuplicateEvents = false;
 
   useEffect(() => {
     if (!enabled) return;
@@ -41,11 +57,17 @@ const useRelayPoolSubscribe = (ops: {
         filters,
         relays,
         (event: any) => {
-          setEvents((prevEvents: Event[]) => [...prevEvents, event]);
+          setEvents((prevEvents: Event[]) => {
+            if (prevEvents.some(e => e.id === event.id)) {
+              return prevEvents;
+            } else {
+              return [...prevEvents, event];
+            }
+          });
         },
         maxDelayms,
         onEose,
-        options
+        options,
       );
       setUnsubscribe(() => () => {
         //
